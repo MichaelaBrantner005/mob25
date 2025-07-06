@@ -1,0 +1,38 @@
+{
+    "theme_color":"#ffe8e8",
+    "background_color":"#a8e6cf",
+    "icons": [
+        {
+        "purpose":"maskable",
+        "sizes":"512x512",
+        "src":"img/icon512_maskable.png",
+        "type":"image/png"
+        },
+
+        {
+        "purpose":"any",
+        "sizes":"512x512",
+        "src":"img/icon512_rounded.png",
+        "type":"image/png"
+        },
+
+        {
+        "purpose": "any",
+        "sizes":"144x144",
+        "src":"img/icon_144.png",
+        "type":"image/png"
+        }
+
+
+        ],
+
+    "orientation":"portrait",
+    "display":"standalone",
+    "dir":"auto",
+    "lang":"de",
+    "name":"MoodNotes",
+    "short_name":"MoodNotes",
+    "start_url":"./",
+    "scope":"./",
+    "description":"Inspirational Mood Tracker - für alle"
+}

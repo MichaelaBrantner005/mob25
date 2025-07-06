@@ -1,0 +1,87 @@
+'use strict';
+
+// hier wird die Zitate API Adresse aufgerufen
+
+let quotesArray = [];
+
+async function fetchQuotes() {
+    try {
+        const response = await fetch("../php/proxy.php");
+        if (!response.ok) throw new Error("Fehler beim Laden der API");
+
+        const data = await response.json();
+        quotesArray = data.quotes; // Zitate speicher
+
+        localStorage.setItem("cachedQuotes", JSON.stringify(quotesArray));
+
+        displayQuotes(); // Darstellung der Zitate
+    } catch (error) {
+        console.error("API-Fehler:", error);
+        document.getElementById("quote-container").innerHTML = "<p>Fehler beim Laden der Zitate.</p>";
+    }
+}
+
+function displayQuotes() {
+    const container = document.getElementById("quote");
+    container.innerHTML = ""; // leeren, falls neu geladen
+
+    quotesArray.forEach((quote, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const content = document.createElement("div");
+        content.className = "card-content";
+
+        const text = document.createElement("p");
+        text.innerHTML = `<em>"${quote.body}"</em>`;
+
+        const author = document.createElement("span");
+        author.className = "quote-author";
+        author.textContent = `– ${quote.author || "Unbekannt"}`;
+
+        content.appendChild(text);
+        content.appendChild(author);
+
+        const action = document.createElement("div");
+        action.className = "card-action";
+
+        const button = document.createElement("a");
+        button.className = "add-button";
+        button.textContent = "Zitat hinzufügen";
+        button.addEventListener("click", () => {
+            // Zitat dem Beitrag hinzufügen
+            localStorage.setItem("selectedQuote", JSON.stringify(quote));
+            console.log("Selected quote:", quote); 
+            window.location.href = "/pages/neuerBeitrag.html";
+
+        });
+
+        action.appendChild(button);
+        card.appendChild(content);
+        card.appendChild(action);
+        container.appendChild(card);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const neuLadenButton = document.getElementById('neueZitate');
+
+    // beim ersten besuch laden
+    if(!localStorage.getItem('zitateGeladen')) {
+        fetchQuotes();
+        localStorage.setItem('zitateGeladen', true);
+    }else{
+        const cached = localStorage.getItem("cachedQuotes");
+        if(cached) {
+            quotesArray = JSON.parse(cached);
+            displayQuotes();
+        }
+    }
+
+    if(neuLadenButton) {
+        neuLadenButton.addEventListener('click', () => {
+            fetchQuotes();
+        });
+    }
+})
+

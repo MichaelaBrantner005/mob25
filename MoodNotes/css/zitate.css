@@ -1,0 +1,57 @@
+.zitate {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.quote-card {
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: green;
+}
+
+.quote-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.quote-author {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.add-button {
+    background-color: var(--primary) !important;
+    color: black !important;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: none;
+}
+
+.add-button:active {
+    background-color: var(--tertiary) !important;
+}
+
+.card .card-action:last-child{
+    border-radius: 0 0 20px 20px;
+}
+
+.card{
+    border-radius: 20px;
+    box-shadow: none;
+}
+
+#neueZitate {
+    display: flex;
+    background-color: var(--primary);
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin: 40px auto 5px auto;
+}

@@ -1,0 +1,71 @@
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Moodnotes</title>
+
+  <!-- Manifest & Materialize -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" href="css/materialize.min.css" rel="stylesheet">
+  <link type="text/css" href="css/styles.css" rel="stylesheet">
+  <link type="text/css" href="css/home.css" rel="stylesheet">
+
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+</head>
+
+<body>
+
+<header>
+  <!-- top nav -->
+  <nav class="z-depth-0">
+    <div class="nav-wrapper container">
+      <a class="left" href="/">
+        <img class="logo" src="img/logo.svg" alt="logo">
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!--Willkommenstext-->
+  <div class="welcome">
+    <h2>Willkommen!</h2>
+    <p>Wie geht es dir heute?</p>
+  </div>
+
+  <!-- Add Button -->
+  <div class="center" style="margin-top: 1.5rem; margin-bottom: 1rem;">
+    <a href="/pages/neuerBeitrag.html" class="btn-floating btn-large add-btn">
+      <i class="material-icons">add</i>
+    </a>
+  </div>
+
+  <!-- Beiträge werden hier per JS eingefügt -->
+</main>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <a href="./index.html" class="nav-item active">
+    <i class="material-icons">home</i>
+    <span>Home</span>
+  </a>
+  <a href="pages/neuerBeitrag.html" class="nav-item">
+    <i class="material-icons">post_add</i>
+    <span>Beitrag erstellen</span>
+  </a>
+  <a href="pages/zitate.html" class="nav-item">
+    <i class="material-icons">format_quote</i>
+    <span>Zitate</span>
+  </a>
+  <a href="pages/mehr.html" class="nav-item">
+    <i class="material-icons">menu</i>
+    <span>Mehr</span>
+  </a>
+</div>
+<script src="js/app.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

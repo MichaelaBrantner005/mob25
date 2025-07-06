@@ -1,0 +1,112 @@
+// beitragDetail.js
+
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    const titelInput = document.getElementById("titel");
+    const datumElement = document.getElementById("aktuellesDatum");
+    const textInput = document.querySelector(".text-input");
+    const fileInput = document.getElementById("fotoInput");
+    const fotoVorschau = document.getElementById("fotoVorschau");
+    let fotoBase64 = "";
+    const zitatBox = document.getElementById("beitrags-zitat");
+
+    const alleBeitraege = JSON.parse(localStorage.getItem("beitraege") || "[]");
+    const beitrag = alleBeitraege.find(b => b.id.toString() === id);
+
+    if (!beitrag) {
+        alert("Beitrag nicht gefunden.");
+        window.location.href = "../index.html";
+        return;
+    }
+
+    // Felder füllen
+    titelInput.value = beitrag.titel;
+    datumElement.textContent = beitrag.datum;
+    textInput.value = beitrag.text;
+    fotoBase64 = beitrag.foto || "";
+
+    if (beitrag.zitat) {
+        zitatBox.innerHTML = `
+            <blockquote>
+                "${beitrag.zitat.body}"<br>
+                <span>– ${beitrag.zitat.author || "Unbekannt"}</span>
+            </blockquote>
+        `;
+    }
+
+    if (fotoBase64) {
+        fotoVorschau.src = fotoBase64;
+        fotoVorschau.style.display = "block";
+    }
+
+
+    // Emoji markieren
+    if (beitrag.emoji) {
+        document.querySelectorAll(".emoji").forEach(e => {
+            if (e.textContent === beitrag.emoji) {
+                e.classList.add("selected");
+            }
+        });
+    }
+
+    // Emoji-Auswahl
+    document.querySelectorAll(".emoji").forEach(emoji => {
+        emoji.addEventListener("click", () => {
+            document.querySelectorAll(".emoji").forEach(e => e.classList.remove("selected"));
+            emoji.classList.add("selected");
+        });
+    });
+
+    // Neues Bild auswählen mit Delay für Kamera-Handling
+    document.getElementById("fotoButton").addEventListener("click", () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener("change", () => {
+        setTimeout(() => {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                fotoBase64 = e.target.result;
+                fotoVorschau.src = fotoBase64;
+                fotoVorschau.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        }, 300);
+    });
+
+    // Speichern
+    const saveBtn = document.querySelector(".save-button");
+    if (saveBtn) {
+        saveBtn.addEventListener("click", () => {
+            const neuerBeitrag = {
+                id: beitrag.id,
+                titel: titelInput.value.trim(),
+                datum: datumElement.textContent,
+                text: textInput.value.trim(),
+                emoji: document.querySelector(".emoji.selected")?.textContent || "",
+                foto: fotoBase64
+            };
+
+            const aktualisiert = alleBeitraege.map(b => b.id === beitrag.id ? neuerBeitrag : b);
+            localStorage.setItem("beitraege", JSON.stringify(aktualisiert));
+            window.location.href = "../index.html";
+        });
+    }
+
+    // Löschen
+    const loeschenBtn = document.getElementById("loeschenBtn");
+    if (loeschenBtn) {
+        loeschenBtn.addEventListener("click", () => {
+            if (confirm("Willst du diesen Beitrag wirklich löschen?")) {
+                const gefiltert = alleBeitraege.filter(b => b.id !== beitrag.id);
+                localStorage.setItem("beitraege", JSON.stringify(gefiltert));
+                window.location.href = "../index.html";
+            }
+        });
+    }
+});

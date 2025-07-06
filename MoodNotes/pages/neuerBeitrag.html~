@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuer Beitrag</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/beitrag.css">
+    <link rel="stylesheet" href="../css/foto.css">
+
+</head>
+<body>
+
+<header class="header">
+    <a class="left" href="/">
+        <img class="logo" src="../img/logo.svg" alt="logo">
+    </a>
+    <!-- <img src="img/logo.png" alt="Mood Notes Logo" class="logo"> -->
+    <h1>Neuer Beitrag</h1>
+</header>
+
+<!-- bottom nav -->
+<div class="bottom-nav">
+    <a href="../index.html" class="nav-item">
+        <i class="material-icons">home</i>
+        <span>Home</span>
+    </a>
+    <a href="/pages/neuerBeitrag.html" class="nav-item active">
+        <i class="material-icons">post_add</i>
+        <span>Beitrag erstellen</span>
+    </a>
+    <a href="/pages/zitate.html" class="nav-item">
+        <i class="material-icons">format_quote</i>
+        <span>Zitate</span>
+    </a>
+    <a href="/pages/Kalender.html" class="nav-item">
+        <i class="material-icons">event</i>
+        <span>Kalender</span>
+    </a>
+    <a href="/pages/mehr.html" class="nav-item">
+        <i class="material-icons">menu</i>
+        <span>Mehr</span>
+    </a>
+</div>
+
+<main class="entry-container">
+    <div class="entry-header">
+        <input type="text" id="titel" name="titel" placeholder="Titel eingeben">
+
+        <span id="aktuellesDatum" class="date"></span>
+
+    </div>
+
+    <div class="mood-box">
+        <p>Wie fühlst du dich heute?</p>
+        <div class="emoji-row">
+            <span class="emoji">😊</span>
+            <span class="emoji">😌</span>
+            <span class="emoji">😭</span>
+            <span class="emoji">😰</span>
+            <span class="emoji">😃</span>
+            <span class="emoji">😴</span>
+            <span class="emoji">😡</span>
+        </div>
+
+        <textarea class="text-input" placeholder="Schreibe deinen Text ..."></textarea>
+
+        <div class="button-group">
+            <button id="fotoButton" class="add-button">Foto hinzufügen</button>
+            <input type="file" id="fotoInput" accept="image/*" capture="environment" style="display: none;">
+            <img id="fotoVorschau" alt="Foto Vorschau" style="display: none; width: 100%; margin-top: 1rem; border-radius: 1rem;">
+
+            <a href="/pages/zitate.html" class="add-button">Zitat hinzufügen</a>
+            <div id="beitrags-zitat"></div>
+
+            <input type="hidden" id="zitat_body" name="zitat_body">
+            <input type="hidden" id="zitat_author" name="zitat_author">
+        </div>
+
+        <div class="submit-buttons">
+            <button class="cancel-button">Abbrechen</button>
+            <button class="save-button">Speichern</button>
+        </div>
+
+    </div>
+</main>
+
+
+
+
+
+<script src="../js/beitragErstellen.js"></script>
+</body>
+</html>
